@@ -3,6 +3,18 @@
 .home {
 
   .intro {
+    
+    img {
+      padding-top: 10px;
+      border-radius: 30px;
+      
+      @media @phone {
+        display: flex;
+        margin: auto;
+        width: 95%;
+        border-radius: 20px;
+      }
+    }
 
     h2 {
       padding: 15px;
@@ -24,6 +36,15 @@
       margin: 20px 2.5%;
       border-radius: 20px;
       height: 100%;
+    }
+
+    @media @phone {
+      .auricular {
+        width: 100%;
+      };
+      .tecnologia, .ondas {
+        display: none;
+      };
     }
   }
 
@@ -58,17 +79,55 @@
       }
 
       .btn {
+        .button (@btn-bg-color; 1px; @btn-bg-color; @porcelain);  
+        font-size: 20px;
+        width: fit-content;
+        padding: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        
+        &:hover {
+          .button (@btn-bg-color; 1px; @porcelain; @btn-bg-color);
+        }
       }
     }
-
+    
     .actual-img {
       width: 46%;
       margin-left: 4%;
-
+      
       img {
         width: 100%;
         height: auto;
         border-radius: 10px;
+      }
+    }
+  }
+  
+  @media @phone {
+    
+    .actual {
+      display: flex;
+      flex-direction: column-reverse;
+      padding: 0px;
+      margin: auto;
+      width: 95%;         
+      
+      .actual-img {
+          width: 95%;
+          display: flex;
+          margin: auto;
+      }
+      
+      .actual-text {
+        padding-top: 10px;
+        width: 100%;
+        
+        .btn {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+        }
       }
     }
   }

@@ -1,1 +1,16 @@
 // Mixins acá
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.size(@size) {
+    font-size: @size;
+}
+
+.button(@color; @width; @backColor; @textColor) {
+    border: @width solid @color;
+    background-color: @backColor;
+    color: @textColor;
+}
