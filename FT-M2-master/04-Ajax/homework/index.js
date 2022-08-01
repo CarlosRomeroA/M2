@@ -1,45 +1,69 @@
 // const { get } = require("@11ty/eleventy/src/TemplateCache");
+function limpiar(tipoDeLimpieza) {
+    if(tipoDeLimpieza === "contenedor"){
+        $("#lista").empty();
+        $("#amigo").empty();
+    }
+    $("#input").val("");
+    $("#inputDelete").val("");
+}
 
-$("#boton").click( ()=> {
-    $("#lista").empty()
+function mostrarAmigos() {
     $.ajax({
         url: 'http://localhost:5000/amigos',
         type: 'get',
         success: (info) => {
-            info.forEach((amigo) => $("#lista").append(`<li id=${amigo.id}> ${amigo.name}</li>`))
+            info.forEach((amigo) => $("#lista").append(`<li id=${amigo.id}> ${amigo.name}</li>`));
         }
     })
-})
+}
 
-$("#search").click(()=> {
-    $("#amigo").empty();
-    let id = $("#input").val();
+function buscarAmigos(id) {
     $.ajax({
         url: `http://localhost:5000/amigos/${id}`,
         type: 'get',
         success: (info) => {
             $("#amigo").append(`<span>${info.name}</span>`);
-            $("#input").val("");
+            limpiar();
+            mostrarAmigos();
+        },
+        error: (error) => {
+            mostrarAmigos();
+            if(error) {
+                alert("el id ingresado no existe");
+                limpiar();
+            }
         }
     })
-})
+}
 
-$("#delete").click( () => {
-    let id = $("#inputDelete").val();
+function borrarAmigos(id) {
     $.ajax({
         url: `http://localhost:5000/amigos/${id}`,
-        type: "delete",
+        type: 'delete',
         success: (info) => {
             alert("amigo eliminado con exito");
-            $("#inputDelete").val("");
-            $("#lista").empty();
-            $.ajax({
-                url: 'http://localhost:5000/amigos',
-                type: 'get',
-                success: (info) => {
-                    info.forEach((amigo) => $("#lista").append(`<li id=${amigo.id}> ${amigo.name}</li>`))
-                }
-            })
+            limpiar();
+            limpiar("contenedor");
+            mostrarAmigos();
         }
     })
+}
+
+$("#boton").click( ()=> {
+    limpiar('contenedor');
+    mostrarAmigos();
+})
+
+$("#search").click(()=> {
+    let id = $("#input").val();
+    if(!id) return alert("debe introducir un id valido");
+    limpiar("contenedor");
+    buscarAmigos(id);
+})
+ 
+$("#delete").click( () => {
+    let id = $("#inputDelete").val();
+    if(!id) return alert("debe introducir un id valido");
+    borrarAmigos(id);    
 })
