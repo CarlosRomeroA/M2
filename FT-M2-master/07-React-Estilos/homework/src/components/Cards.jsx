@@ -5,7 +5,7 @@ import s from './Cards.module.css';
 export default function Cards({cities}) {
   // acá va tu código
   // tip, podés usar un map
-  return (
+  return (  
     <div className={s.container}>
       {
         cities.map(ciudad => 
