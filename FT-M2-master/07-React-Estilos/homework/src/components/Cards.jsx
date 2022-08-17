@@ -8,7 +8,7 @@ export default function Cards({cities}) {
   return (  
     <div className={s.container}>
       {
-        cities.map(ciudad => 
+        cities.map(ciudad =>
           <Card
             max={ciudad.main.temp_max}
             min={ciudad.main.temp_min}

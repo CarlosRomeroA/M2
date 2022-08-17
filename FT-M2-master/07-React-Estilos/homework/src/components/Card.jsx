@@ -6,17 +6,20 @@ export default function Card({max, min, name, img, onClose}) {
   // acá va tu código
   return (
     <div className={s.card}>
-      <div>
-        <div className={s.title}>
-          <button className={s.btn} onClick={onClose}>x</button>
-          <h3>{name}</h3>
+      <div className={s.title}>
+        <button className={s.btn} onClick={onClose}>x</button>
+        <h3>{name}</h3>
+      </div>
+      <div className={s.temp}>
+        <div>
+          <h4>Min</h4>
+          <h4>{min}</h4>  
+        </div> 
+        <div>
+          <h4>Max</h4>
+          <h4>{max}</h4>
         </div>
-        <h5>Min</h5>
-        <div>{min}</div>  
-        <h5>Max</h5>
-        <div>{max}</div>
         <img src={`http://openweathermap.org/img/wn/${img}@2x.png`} alt='icono imagen'/>
-        <div>{onClose}</div>
       </div>
     </div>
   )
