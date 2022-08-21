@@ -6,7 +6,7 @@ import Cards from './components/Cards.jsx';
 export default function App() {
 
   const [cities, setCities] = useState([]);
-
+  
   function onSearch(ciudad) {
 
     const apiKey= '4ae2636d8dfbdc3044bede63951a019b'
@@ -28,7 +28,9 @@ export default function App() {
             latitud: recurso.coord.lat,
             longitud: recurso.coord.lon
           };
-          setCities(oldCities => [...oldCities, ciudad]);
+          const ciudadEncontrada = cities.find(c => c.name === ciudad.name)
+          if (ciudadEncontrada) return alert('la ciudad ya se encuentra en pantalla');
+          else setCities(allCities => [...allCities, ciudad]);
         } else {
           alert("Ciudad no encontrada");
         }
@@ -36,7 +38,7 @@ export default function App() {
   }
 
   function onClose(id) {
-    setCities(oldCities => oldCities.filter(c => c.id !== id));
+    setCities(allCities => allCities.filter(c => c.id !== id));
   }
 
   return (
