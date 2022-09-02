@@ -6,7 +6,11 @@ import './Movie.css';
 
 class Movie extends React.Component {
 
-
+componentDidMount(){
+    const movieId = this.props.match.params.id
+    this.props.getMovieDetail(movieId)
+    
+}
 
     render() {
         return (
