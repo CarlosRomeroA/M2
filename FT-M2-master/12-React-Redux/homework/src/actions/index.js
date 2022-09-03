@@ -14,6 +14,12 @@ export function removeMovieFavourite(payload) {
     }
 }
 
+export function clearDetail() {
+    return {
+        type: "CLEAR_DETAIL"
+    }
+}
+
 export function getMovies(titulo) {
     return function(dispatch) {
         return fetch(`http://www.omdbapi.com/?apikey=e6432ecd&s=${titulo}`)
@@ -25,5 +31,19 @@ export function getMovies(titulo) {
             })
         })
     } 
+}
+
+export function getMovieDetail(id) {
+    return function(dispatch) {
+        return fetch(`http://www.omdbapi.com/?apikey=e6432ecd&i=${id}`)
+        .then(res => res.json())
+        .then(res => {
+            dispatch({
+                type: "GET_DETAILS",
+                payload: res
+            })
+        })
+    }
+
 }
 

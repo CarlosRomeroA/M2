@@ -1,7 +1,8 @@
 const initialState = {
     moviesFavourites: [],
     moviesLoaded: [],
-    movieDetail: {} 
+    moviesDetail: {},
+    loading: false
 }
 
 function rootReducer(state = initialState, action) {
@@ -21,6 +22,20 @@ function rootReducer(state = initialState, action) {
         return {
             ...state, 
             moviesFavourites: state.moviesFavourites.filter(movie => movie.id !== action.payload)
+        }
+    }
+    else if (action.type === "GET_DETAILS") {
+        return {
+            ...state,
+            moviesDetail: action.payload,
+            loading: false
+        }
+    }
+
+    else if (action.type === "CLEAR_DETAIL"){
+        return {
+            ...state,
+            moviesDetail: {}
         }
     }
     else return state;
